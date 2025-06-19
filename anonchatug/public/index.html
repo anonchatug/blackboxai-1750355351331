@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnonChat - Anonymous Video Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Initial Gender Selection Screen -->
+        <div id="gender-select" class="screen active">
+            <div class="welcome-container">
+                <h1><i class="fas fa-mask"></i> AnonChat</h1>
+                <p>Connect with random people worldwide</p>
+                <div class="gender-buttons">
+                    <button id="maleBtn" 
+                            class="btn-gender" 
+                            data-gender="male" 
+                            data-testid="male-button"
+                            style="width: 250px; height: 100px; margin: 10px; cursor: pointer;">
+                        <span class="btn-content">
+                            <i class="fas fa-mars"></i>
+                            <span class="btn-text">I'm Male</span>
+                        </span>
+                    </button>
+                    <button id="femaleBtn" 
+                            class="btn-gender" 
+                            data-gender="female" 
+                            data-testid="female-button"
+                            style="width: 250px; height: 100px; margin: 10px; cursor: pointer;">
+                        <span class="btn-content">
+                            <i class="fas fa-venus"></i>
+                            <span class="btn-text">I'm Female</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Screen -->
+        <div id="chat-screen" class="screen">
+            <!-- Header -->
+            <header>
+                <div class="logo">
+                    <i class="fas fa-mask"></i>
+                    <h1>AnonChat</h1>
+                </div>
+                <div class="controls">
+                    <button id="toggleVideoBtn" class="btn">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button id="toggleAudioBtn" class="btn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="nextBtn" class="btn">
+                        <i class="fas fa-forward"></i> Next
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main>
+                <!-- Video Container -->
+                <div class="video-container">
+                    <video id="remoteVideo" autoplay playsinline></video>
+                    <div id="localVideoContainer" class="draggable">
+                        <video id="localVideo" autoplay muted playsinline></video>
+                    </div>
+                    
+                    <!-- Partner Location -->
+                    <div class="partner-info">
+                        <i class="fas fa-location-dot"></i>
+                        <span id="partnerLocation">Connecting...</span>
+                    </div>
+
+                    <!-- Report Button -->
+                    <button id="reportBtn" class="report-btn">
+                        <i class="fas fa-flag"></i>
+                    </button>
+                </div>
+
+                <!-- Chat Section -->
+                <div class="chat-section">
+                    <div class="chat-header">
+                        <h3>Chat</h3>
+                        <div class="chat-status">
+                            <span id="typingIndicator"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="messages" id="chatMessages"></div>
+                    
+                    <div class="chat-input-area">
+                        <button id="emojiBtn" class="emoji-btn">
+                            <i class="far fa-smile"></i>
+                        </button>
+                        <input type="text" id="messageInput" placeholder="Type a message...">
+                        <button id="sendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Report Modal -->
+        <div id="reportModal" class="modal">
+            <div class="modal-content">
+                <h2>Report User</h2>
+                <form id="reportForm">
+                    <select name="reason" required>
+                        <option value="">Select a reason</option>
+                        <option value="inappropriate">Inappropriate Content</option>
+                        <option value="harassment">Harassment</option>
+                        <option value="spam">Spam</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <textarea name="details" placeholder="Additional details..."></textarea>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn cancel">Cancel</button>
+                        <button type="submit" class="btn submit">Submit Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="screen">
+            <div class="loader"></div>
+            <p>Finding a match...</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="/js/chat.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
